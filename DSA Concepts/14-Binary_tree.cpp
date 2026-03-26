@@ -1,5 +1,6 @@
 #include <iostream>
 #include <vector>
+#include <queue>
 using namespace std;
 
 static int idx = -1; // to traverse the preorder vector
@@ -29,6 +30,73 @@ Node *BuildTree(vector<int> preorder)
     return root;
 }
 
+// Traversals => preorder, inorder, postorder, level order (iterative)
+// starting 3 algorithms are recursive functions
+
+// 1) preorder traversal
+void Preorder(Node *root)
+{
+    // Base Case
+    if (root == NULL)
+        return;
+    cout << root->data << " ";
+    Preorder(root->left);
+    Preorder(root->right);
+}
+
+// 2) inorder traversal
+void inorder(Node *root)
+{
+    // Base Case
+    if (root == NULL)
+        return;
+    inorder(root->left);
+    cout << root->data << " ";
+    inorder(root->right);
+}
+
+// 2) postorder traversal
+void postorder(Node *root)
+{
+    // Base Case
+    if (root == NULL)
+        return;
+    postorder(root->left);
+    postorder(root->right);
+    cout << root->data << " ";
+}
+
+// 3) Level-Order traversal (DFS)
+void levelOrder(Node *root)
+{
+    queue<Node *> q;
+    // step-1 => push to queue
+    q.push(root);
+    q.push(NULL);
+    // step-2 => pop each level of tree
+    while (q.size() > 0)
+    {
+        Node *curr = q.front();
+        q.pop();
+        if (curr == NULL)
+        {
+            if (!q.empty())
+            {
+                cout << endl;
+                q.push(NULL);
+                continue;
+            }
+            else
+                break;
+        }
+        cout << curr->data << " ";
+        if (curr->left != NULL)
+            q.push(curr->left);
+        if (curr->right != NULL)
+            q.push(curr->right);
+    }
+}
+
 int main()
 {
     vector<int> preorder = {1, 2, -1, -1, 3, 4, -1, -1, 5, -1, -1};
@@ -38,6 +106,18 @@ int main()
     cout << "ROOT Right Child : " << root->right->data << endl;
     cout << "Right's Left Child : " << root->right->left->data << endl;
     cout << "Right's Right Child : " << root->right->right->data << endl;
+    cout << "Elements of the Binary Tree (Post order) : \n";
+    Preorder(root);
+    cout << endl;
+    cout << "Elements of the Binary Tree (In order) : \n";
+    inorder(root);
+    cout << endl;
+    cout << "Elements of the Binary Tree (Post order) : \n";
+    postorder(root);
+    cout << endl;
+    cout << "Elements of the Binary Tree (Level order => DFS) : \n";
+    levelOrder(root);
+    cout << endl;
 
     return 0;
 }
