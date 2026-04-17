@@ -2,7 +2,7 @@
 #include <vector>
 using namespace std;
 
-// works for ascending array
+// Works for ascending array
 int binarySearch(vector<int> &nums, int target)
 {
     // st => starting element index
@@ -75,7 +75,7 @@ int main()
 
     // Binary Search with recursion //
 
-    // Previous code is more optimed than this code.
+    // Previous code is more optimized than this code.
     // Time Complexity = O(log n).
     // Space Complexity = O(log n).
     cout << "\nBinary Search with recursion\n"
