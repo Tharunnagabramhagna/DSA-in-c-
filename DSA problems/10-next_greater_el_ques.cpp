@@ -38,7 +38,7 @@ vector<int> nxtGreater(vector<int> &arr, stack<int> &s, vector<int> &ans)
 /* Celebrity Problem */
 /* Given a 2D Array (nxn), such that arr[i][j] = 1 means the ith person knows jth person,
 the task is to find the celebrity.
-A clebrity is a person who is known to all but does not know anyone.
+A celebrity is a person who is known to all but does not know anyone.
 Return the index of the celebrity, if there is no celebrity return -1.
 
 Ex :- arr = [[0,1,0],[0,0,0],[0,1,0]]*/

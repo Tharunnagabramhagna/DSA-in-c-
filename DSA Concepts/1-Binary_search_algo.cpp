@@ -52,7 +52,7 @@ int main()
     // Sorted arrays can be ascending or descending.
     // Examples of sorted arrays: 1) [2,9,14,25,36] 2) [10,5,2,1]
     // Time Complexity = O(log n).
-    // Time Complexity = O(1).
+    // Space Complexity = O(1).
 
     // Code:
     int n, target;
