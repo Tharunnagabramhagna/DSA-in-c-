@@ -1,5 +1,6 @@
 #include <iostream>
 #include <list>
+#include <queue>
 #include <vector>
 using namespace std;
 
@@ -39,7 +40,7 @@ public:
         return false; // cycle is not found
     }
     // Cycle detection using DFS of undirected Graph
-    bool isCycle(int st)
+    bool isCycleDFS(int st)
     {
         vector<bool> vis(V, false);
         int src = st;
@@ -53,6 +54,46 @@ public:
         }
         return false; // cycle not found
     }
+    // Cycle detection using BFS of undirected Graph
+    bool isCycleUndirBFS(int src, vector<bool> &vis)
+    {
+        queue<pair<int, int>> q; // [edge , par]
+        q.push({src, -1});
+        vis[src] = true;
+
+        while (q.size() > 0)
+        {
+            int u = q.front().first;
+            int parU = q.front().second;
+            q.pop();
+            for (int v : l[u])
+            {
+                if (!vis[v])
+                {
+                    q.push({v, u}); // v => src ; u => parU
+                    vis[v] = true;
+                }
+                else if (v != parU)
+                    return true;
+            }
+        }
+        return false;
+    }
+
+    bool isCycleBFS(int st)
+    {
+        int src = st;
+        vector<bool> vis(V, false);
+        for (int i = 0; i < V; i++)
+        {
+            if (!vis[i])
+            {
+                if (isCycleUndirBFS(src, vis))
+                    return true;
+            }
+        }
+        return false;
+    }
 };
 
 int main()
@@ -65,7 +106,21 @@ int main()
     g.addEdge(1, 2);
     g.addEdge(3, 4);
 
-    if (g.isCycle(0))
+    cout << "Cycle detection using DFS..\n";
+    if (g.isCycleDFS(0))
+        cout << "The Cycle is detected.\n";
+    else
+        cout << "The Cycle is not detected.\n";
+
+    Graph g1(5); // seperated graph into two parts
+
+    g1.addEdge(0, 1);
+    g1.addEdge(0, 2);
+    g1.addEdge(1, 2);
+    g1.addEdge(3, 4);
+
+    cout << "Cycle detection using BFS..\n";
+    if (g1.isCycleBFS(0))
         cout << "The Cycle is detected.\n";
     else
         cout << "The Cycle is not detected.\n";
