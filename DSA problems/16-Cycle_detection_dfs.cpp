@@ -63,8 +63,8 @@ public:
 
         while (q.size() > 0)
         {
-            int u = q.front().first;
-            int parU = q.front().second;
+            int u = q.front().first; // Edge 
+            int parU = q.front().second; // par
             q.pop();
             for (int v : l[u])
             {
@@ -73,7 +73,7 @@ public:
                     q.push({v, u}); // v => src ; u => parU
                     vis[v] = true;
                 }
-                else if (v != parU)
+                else if (v != parU) // BackEdge Case
                     return true;
             }
         }
