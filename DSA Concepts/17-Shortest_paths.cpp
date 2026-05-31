@@ -47,8 +47,30 @@ void DijkstraAlgo(int src, vector<vector<Edge>> g, int V)
     cout << endl;
 }
 
+void bellmanFord(int src,  vector<vector<Edge>> g1, int V1) {
+    vector<int>dist(V1,INT_MAX);
+    dist[src] = 0;
+
+    for(int i = 0; i < V1-1; i++) {
+        // Traverse through each vertex
+        for(int u = 0; u < V1; u++) { // u -----> v
+            for(Edge e : g1[u]) { // neighours of u
+                if(dist[e.v] > dist[u] + e.wt)
+                    dist[e.v] = dist[u] + e.wt;
+            }
+        }
+    }
+
+    // Print the shortest paths
+    cout << "Shortest Path from the source vertex :\n";
+    for(int i = 0; i < V1; i++)
+        cout << dist[i] << " ";
+    cout << endl;
+}
+
 int main()
 {
+    // Dijkstra's Algorithm
     int V = 6;
     vector<vector<Edge>> g(V);
 
@@ -67,6 +89,24 @@ int main()
 
     cout << "\n--Dijkstra's Algorithm--\n";
     DijkstraAlgo(0, g, V);
+
+    // Bellman-ford Algorithm
+    int V1 = 5;
+
+    vector<vector<Edge>> g1(V1);
+
+    g1[0].push_back(Edge(1,2));
+    g1[0].push_back(Edge(2,4));
+    
+    g1[1].push_back(Edge(4,-1));
+    g1[1].push_back(Edge(2,-4));
+
+    g1[2].push_back(Edge(3,2));
+    
+    g1[3].push_back(Edge(4,4));
+
+    cout << "\n--Bellman-ford Algorithm--\n";
+    bellmanFord(0,g1,V1);
 
     return 0;
 }
