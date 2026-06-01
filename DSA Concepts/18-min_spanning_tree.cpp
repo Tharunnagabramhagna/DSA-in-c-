@@ -1,7 +1,6 @@
 #include <iostream>
 #include <queue>
 #include <vector>
-#include <climits>
 using namespace std;
 
 int primAlgo(int src, int V, vector<vector<pair<int, int>>> adj)
@@ -9,7 +8,7 @@ int primAlgo(int src, int V, vector<vector<pair<int, int>>> adj)
     vector<bool> MstSet(V, false);
     int minCost = 0;
 
-    // min-heap using a priority queue
+    // Min-heap using a priority queue
     priority_queue<pair<int, int>, vector<pair<int, int>>, greater<pair<int, int>>> pq;
     pq.push({0, src}); // [edge weight, vertex]
 
@@ -26,7 +25,7 @@ int primAlgo(int src, int V, vector<vector<pair<int, int>>> adj)
             minCost += wt;    // add the edge weight
 
             for (int i = 0; i < adj[u].size(); i++)
-            {                            // neighbors of u
+            {                            // Neighbors of u
                 int v = adj[u][i].first; // u ----> v
                 int w = adj[u][i].second;
                 if (!MstSet[v])
@@ -63,6 +62,25 @@ int main()
 
     cout << "\n--Prim's Algorithm--\n";
     cout << "Cost of MST: " << primAlgo(0, V, adj) << endl;
+    cout << endl;
+
+    int V1 = 6;
+
+    vector<vector<pair<int, int>>> adj1(V1); // v, wt
+
+    adj1[0].push_back({5, 10});
+    adj1[5].push_back({0, 10});
+    adj1[5].push_back({4, 25});
+    adj1[4].push_back({5, 25});
+    adj1[4].push_back({3, 22});
+    adj1[3].push_back({4, 22});
+    adj1[3].push_back({2, 12});
+    adj1[2].push_back({3, 12});
+    adj1[2].push_back({1, 16});
+    adj1[1].push_back({2, 16});
+
+    cout << "\nCase with no edge removals:\n";
+    cout << "Cost of MST: " << primAlgo(0, V1, adj1) << endl;
     cout << endl;
 
     return 0;
