@@ -66,7 +66,6 @@ public:
 int main()
 {
     DisjointSetUnion dsu(6);
-
     dsu.unionByRank(0, 2);
     cout << "Position of 2: " << dsu.find(2) << endl;
     dsu.unionByRank(1, 3);
