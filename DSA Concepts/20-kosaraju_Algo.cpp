@@ -23,7 +23,7 @@ public:
     }
 
     // topological sort logic
-    void topoSort(int curr, vector<int> &vis, stack<int> &s)
+    void topoSort(int curr, vector<bool> &vis, stack<int> &s)
     {
         vis[curr] = true;
         for (int neigh : adj[curr])
@@ -34,7 +34,7 @@ public:
         s.push(curr);
     }
 
-    void dfs(int curr, vector<int> &vis, vector<vector<int>> &transpose)
+    void dfs(int curr, vector<bool> &vis, vector<vector<int>> &transpose)
     {
         vis[curr] = true;
         cout << curr << " ";
@@ -48,7 +48,7 @@ public:
     void kosarajuAlgo()
     { // T.C => O(V+E)
         // step-1 => topological sort => O(V+E)
-        vector<int> vis(V, false);
+        vector<bool> vis(V, false);
         stack<int> s;
         for (int i = 0; i < V; i++)
         {
