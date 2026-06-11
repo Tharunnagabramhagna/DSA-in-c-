@@ -46,8 +46,8 @@ public:
     }
 
     void kosarajuAlgo()
-    {
-        // step-1 => topological sort
+    { // T.C => O(V+E)
+        // step-1 => topological sort => O(V+E)
         vector<int> vis(V, false);
         stack<int> s;
         for (int i = 0; i < V; i++)
@@ -56,7 +56,7 @@ public:
                 topoSort(i, vis, s);
         }
 
-        // step-2 => transpose graph
+        // step-2 => transpose graph => O(V+E)
         vector<vector<int>> transpose(V);
         for (int u = 0; u < V; u++)
         { // u ---> v
@@ -65,7 +65,7 @@ public:
                 transpose[v].push_back(u);
         }
 
-        // step-3 => DFS with stack nodes on transpose
+        // step-3 => DFS with stack nodes on transpose => O(V+E)
         cout << "Strongly connected components of the graph : \n";
         while (s.size() > 0)
         {
