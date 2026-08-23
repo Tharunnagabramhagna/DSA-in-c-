@@ -19,10 +19,10 @@ assignment is not possible. */
 Your goal is to assign books in such a way that the maximum number of pages
 assigned to a student is minimized. */
 
-bool isValid(vector<int> &arr, int n, int m, int maxAllocatedPages)
+bool isValid(vector<int> &arr, int m, int maxAllocatedPages)
 { // O(n)
     int student = 1, pages = 0, i;
-    for (i = 0; i < n; i++)
+    for (i = 0; i < arr.size(); i++)
     {
         if (arr[i] > maxAllocatedPages)
             return false;
@@ -40,20 +40,22 @@ bool isValid(vector<int> &arr, int n, int m, int maxAllocatedPages)
 
 int allocateBook(vector<int> &arr, int m)
 {
-    int n = arr.size();
     // Edge case
-    if (n < m)
+    if (arr.size() < m)
         return -1;
     // sum of elements
-    int sum = 0;
-    for (int val : arr) // O(n)
+    int sum = 0, st = 0;
+    // start from max array value because smaller values are not a possible answers
+    for (int val : arr) {// O(n)
+        st = max(st,val);
         sum += val;
+    }
 
-    int st = 0, end = sum, ans = -1;
+    int end = sum, ans = -1;
     while (st <= end)
     {
         int mid = st + (end - st) / 2;
-        if (isValid(arr, n, m, mid))
+        if (isValid(arr, m, mid))
         {
             // Valid Case => search in left half
             ans = mid;
@@ -226,7 +228,7 @@ int main()
         cin >> Arr[i];
     }
     // input students
-    cout << "Enter the number of students required = ";
+    cout << "Enter the number of painters required = ";
     cin >> m1;
     // output
     cout << "Minimum amount of time = " << painterPartition(Arr, m1) << endl;
