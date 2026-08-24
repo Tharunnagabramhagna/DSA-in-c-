@@ -102,16 +102,13 @@ bool isPossible(vector<int> &arr, int n, int m, int maxAllowedTime)
 int painterPartition(vector<int> &arr, int m)
 {
     int n = arr.size();
-    // Edge case
-    // if (n < m)
-    //     return -1; => ans = -1
     // sum of elements
     int end = 0, maxVal = INT_MIN;
-    for (int val : arr) // O(n)
+    for (int val : arr) {// O(n)
+        // max element
+        maxVal = max(maxVal, val);
         end += val;
-    // max element
-    for (int i = 0; i < n; i++)
-        maxVal = max(maxVal, arr[i]);
+    }
 
     int st = maxVal, ans = -1;
     while (st <= end) // O(log sum)
