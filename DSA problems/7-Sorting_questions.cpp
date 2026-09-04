@@ -3,7 +3,7 @@
 #include <algorithm>
 using namespace std;
 
-void printArr0(vector<int> &arr)
+void printArrBef(vector<int> &arr)
 {
     cout << "Array Before Sorting:\n";
     for (int val : arr)
@@ -11,7 +11,7 @@ void printArr0(vector<int> &arr)
     cout << endl;
 }
 
-void printArr1(vector<int> &arr)
+void printArrAft(vector<int> &arr)
 {
     cout << "Array After Sorting:\n";
     for (int val : arr)
@@ -169,9 +169,9 @@ int main()
         cin >> nums2[j];
     }
     // Output
-    printArr0(nums1);
+    printArrBef(nums1);
     mergeArr(nums1, nums2, m, n); // merged by function
-    printArr1(nums1);
+    printArrAft(nums1);
 
     return 0;
 }
